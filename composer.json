@@ -1,0 +1,18 @@
+{
+  "name": "open-ecommerce/oe-team-members",
+  "description": "Team Members custom type for wordpress",
+  "keywords": ["wordpress", "plugin", "team members", "custom type"],
+  "homepage": "http://www.open-ecommerce.org",
+  "license": "GPL3",
+  "authors": [
+    {
+      "name": "open-ecommerce.org",
+      "email": "info@open-ecommerce.org",
+      "homepage": "http://www.open-ecommerce.org"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "composer/installers": "v1.0.7"
+  }
+}
