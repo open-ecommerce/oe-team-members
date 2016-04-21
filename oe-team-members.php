@@ -49,9 +49,6 @@ function my_admin() {
     add_meta_box('team_members_meta_box', 'Member Details', 'display_team_members_meta_box', 'team_members', 'normal', 'high');
 }
 
-
-
-add_action('save_post', 'add_team_members_fields', 10, 2);
 function display_team_members_meta_box($team_members) {
     $team_members_order = get_post_meta($team_members->ID, 'team_members_order', true);
     $team_members_title = get_post_meta($team_members->ID, 'team_members_title', true);
@@ -77,6 +74,21 @@ function display_team_members_meta_box($team_members) {
     </table>
     </div>
     <?php
+}
+
+
+add_action('save_post', 'add_team_members_fields', 10, 2);
+function add_team_members_fields($team_members_id, $team_members) {
+    if ($team_members->post_type == 'team_members_order') {
+        if (isset($_POST['team_members_order']) &&
+                $_POST['team_members_order'] != '') {
+            update_post_meta($team_members_id, 'team_members_order', esc_html($_POST['team_members_order']));
+        }
+        if (isset($_POST['team_members_title']) &&
+                $_POST['team_members_title'] != '') {
+            update_post_meta($team_members_id, 'team_members_title', sanitize_text_field($_POST['team_members_title']));
+        }
+    }
 }
 
 
@@ -108,6 +120,19 @@ function my_custom_team_members_column( $column, $post_id ) {
             break;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 add_filter( 'manage_edit-team_members_sortable_columns', 'team_register_sortable_columns' );
 function team_register_sortable_columns( $columns ) {
