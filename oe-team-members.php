@@ -101,8 +101,8 @@ function add_team_members_columns($columns) {
 }
 
 
-add_action( 'manage_team_members_posts_custom_column' , 'my_custom_team_members_column' );
-function my_custom_team_members_column( $column, $post_id ) {
+add_action( 'manage_team_members_posts_custom_column' , 'my_custom_team_members_columns', 10, 2 );
+function my_custom_team_members_columns( $column, $post_id ) {
     global $post;
 
     switch ( $column ) {
