@@ -79,7 +79,7 @@ function display_team_members_meta_box($team_members) {
 
 add_action('save_post', 'add_team_members_fields', 10, 2);
 function add_team_members_fields($team_members_id, $team_members) {
-    if ($team_members->post_type == 'team_members_order') {
+    if ($team_members->post_type == 'team_members') {
         if (isset($_POST['team_members_order']) &&
                 $_POST['team_members_order'] != '') {
             update_post_meta($team_members_id, 'team_members_order', esc_html($_POST['team_members_order']));
