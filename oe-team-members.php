@@ -36,8 +36,8 @@ function create_team_members() {
         'taxonomies' => array('category'),
         'menu_icon' => plugins_url('images/oe-team-members.png', __FILE__),
         'query_var' => true,
-        'rewrite' => array('slug' => 'member'),
-        'has_archive' => true,
+        'rewrite' => array('slug' => 'members'),
+        'has_archive' => false,
         'captability_type' => 'post',
         'hierarchical' => 'false'
             )
@@ -146,10 +146,10 @@ function include_template_function($template_path) {
     if (get_post_type() == 'team_members') {
         if (is_single()) {
             if ($theme_file = locate_template(array
-                ('single-team_members.php'))) {
+                ('single-team-members.php'))) {
                 $template_path = $theme_file;
             } else {
-                $template_path = plugin_dir_path(__FILE__) . '/single-team_members.php';
+                $template_path = plugin_dir_path(__FILE__) . 'single-team-members.php';
             }
         }
     }

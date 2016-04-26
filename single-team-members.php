@@ -1,48 +1,35 @@
 <?php
 /*
-  Template Name: New Template
+  Template Name: Single Team Member
  */
 
-get_header();
-?>
+  get_header(); ?>
 
-<div id="primary">
-    <div id="content" role="main">
-        <?php query_posts(array('post_type' => 'dropin_listing')); ?>
-        <?php $mypost = array('post_type' => 'dropin_listing');
-        $loop = new WP_Query($mypost);
-        ?>
-        <!-- Cycle through all posts -->
-<?php while ($loop->have_posts()) : $loop->the_post(); ?>
-            <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <header class="entry-header">
+  <?php get_template_part( 'template-parts/featured-image' ); ?>
 
+  <div id="page-sidebar-left" role="main">
 
-                    este soy yo
+  <?php do_action( 'foundationpress_before_content' ); ?>
+  <?php while ( have_posts() ) : the_post(); ?>
+    <article <?php post_class('main-content') ?> id="post-<?php the_ID(); ?>">
+        <header>
+            <h1 class="entry-title"><?php the_title(); ?></h1>
+        </header>
+        <?php do_action( 'foundationpress_page_before_entry_content' ); ?>
+        <div class="entry-content">
+            <?php the_content(); ?>
+        </div>
+        <footer>
+            <?php wp_link_pages( array('before' => '<nav id="page-nav"><p>' . __( 'Pages:', 'foundationpress' ), 'after' => '</p></nav>' ) ); ?>
+            <p><?php the_tags(); ?></p>
+        </footer>
+    </article>
+  <?php endwhile;?>
 
-                    <!-- Display featured image in right-aligned floating div -->
-                    <div style="float:top; margin: 10px">
-                        <?php the_post_thumbnail(array(100, 100)); ?>
-                    </div>
+  <?php do_action( 'foundationpress_after_content' ); ?>
 
-                    <!-- Display Title and Author Name -->
-                    <strong>Title: </strong>
-                    <?php the_title(); ?><br />
-                    <strong>Name: </strong>
-                    <?php echo esc_html(get_post_meta(get_the_ID(), 'listing_organization', true)); ?>
-                    <br />
+  <?php get_sidebar(); ?>
 
+  </div>
 
-                </header>
-
-                <!-- Display movie review contents -->
-                <div class="entry-content"><?php the_content(); ?></div>
-
-            </article>
-
-            <hr/>
-<?php endwhile; ?>
-    </div>
-</div>
-<?php wp_reset_query(); ?>
-<?php get_footer(); ?>
+  <?php get_footer();
